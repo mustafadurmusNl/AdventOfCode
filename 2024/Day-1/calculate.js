@@ -12,3 +12,23 @@ export function calculateDistance({ list1, list2 }) {
 
     return totalDistance;
 }
+
+export function calculateSimilarityScore({ list1, list2 }) {
+    // Create a frequency map for numbers in list2
+    const frequencyMap = new Map();
+
+    // Populate the frequency map with counts of each number in list2
+    for (const num of list2) {
+        frequencyMap.set(num, (frequencyMap.get(num) || 0) + 1);
+    }
+
+    // Calculate the similarity score
+    let similarityScore = 0;
+
+    for (const num of list1) {
+        const countInList2 = frequencyMap.get(num) || 0;
+        similarityScore += num * countInList2;
+    }
+
+    return similarityScore;
+}
